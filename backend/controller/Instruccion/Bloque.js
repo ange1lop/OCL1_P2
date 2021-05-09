@@ -13,7 +13,7 @@ const CicloDoWhile = require("./DoWhile");
 const CicloFor = require("./For");
 const EjecutarSwitch = require("./Switch");
 
-function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
+function Bloque(_instrucciones, _ambito){
     var cadena = ""
     var hayBreak = false;
     var hayContinue = false;
@@ -48,16 +48,16 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
             }
         }
         if(instruccion.tipo === TIPO_INSTRUCCION.COUT){
-            cadena+=Cout(instruccion, _ambito,_Error,Simbol)+'\n'
+            cadena+=Cout(instruccion, _ambito)+'\n'
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.DECLARACION){
-            var mensaje = Declaracion(instruccion, _ambito,_Error,_entorno,Simbol)
+            var mensaje = Declaracion(instruccion, _ambito)
             if(mensaje!=null){
                 cadena+=mensaje+'\n'
             }
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.FOR){
-            var ejec = CicloFor(instruccion, _ambito,_Error,Simbol)
+            var ejec = CicloFor(instruccion, _ambito)
             var mensaje=ejec.cadena
             haybreak=false
             haycontinue=false
@@ -68,13 +68,13 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
             }
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.ASIGNACION){
-            var mensaje = Asignacion(instruccion, _ambito,_Error,Simbol)
+            var mensaje = Asignacion(instruccion, _ambito)
             if(mensaje!=null){
                 cadena+=mensaje+'\n'
             }
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.WHILE){
-            var mensaje = CicloWhile(instruccion, _ambito,_Error,Simbol)
+            var mensaje = CicloWhile(instruccion, _ambito)
             hayBreak= false
             hayContinue=false
             hayReturn=ejec.hayReturn
@@ -83,7 +83,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
                 cadena+=mensaje+'\n'
             }
         }else if(instruccion.tipo === TIPO_INSTRUCCION.DO_WHILE){
-            var mensaje = CicloDoWhile(instruccion, _ambito,_Error,Simbol)
+            var mensaje = CicloDoWhile(instruccion, _ambito)
             hayBreak= false
             hayContinue=false
             hayReturn=ejec.hayReturn
@@ -94,7 +94,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.LLAMADA_METODO){
             const Exec = require("./Exec");
-            var mensaje = Exec(instruccion, _ambito,_Error,"llamada a metodo"+instruccion.nombre,Simbol)
+            var mensaje = Exec(instruccion, _ambito)
             hayReturn=false;
             valorRetorno=null;
             if(mensaje!=null){
@@ -103,7 +103,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
             }
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.IF){
-            var ejec = SentenciaIf(instruccion, _ambito,_Error,Simbol)
+            var ejec = SentenciaIf(instruccion, _ambito)
             var mensaje = ejec.cadena
             hayBreak=ejec.hayBreak
             hayContinue=false
@@ -114,7 +114,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
             }
         }
         else if (instruccion.tipo === TIPO_INSTRUCCION.SWITCH) {
-            var ejec = EjecutarSwitch(instruccion, _ambito,_Error,Simbol);
+            var ejec = EjecutarSwitch(instruccion, _ambito);
             var mensaje=ejec.cadena
             haybreak=false
             haycontinue=false
@@ -132,7 +132,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
             }
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.IFCE){
-            var ejec = SentenciaIfElse(instruccion, _ambito,_Error,Simbol)
+            var ejec = SentenciaIfElse(instruccion, _ambito)
             var mensaje = ejec.cadena
             hayBreak=ejec.hayBreak
             hayContinue=false
@@ -144,7 +144,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.IFCEIF){
             //console.log(instruccion)
-            var ejec = SentenciaIfElseIf(instruccion, _ambito_Error,Simbol)
+            var ejec = SentenciaIfElseIf(instruccion, _ambito)
             var mensaje = ejec.cadena
             hayBreak=ejec.hayBreak
             hayContinue=false
@@ -192,7 +192,7 @@ function Bloque(_instrucciones, _ambito,_Error,_entorno,Simbol){
         }
         else if(instruccion.tipo === TIPO_INSTRUCCION.MODIFICAR_VECTOR){
             var inst=instruccion
-            var mensaje = AsignacionVector(inst, _ambito,_Error,_entorno,Simbol)
+            var mensaje = AsignacionVector(inst, _ambito)
             if(mensaje!=null){
                 cadena+=mensaje
             }

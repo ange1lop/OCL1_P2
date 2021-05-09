@@ -8,11 +8,11 @@ const OperacionTernaria = require("./OperacionTernaria");
 const ValorExpresion = require("./ValorExpresion");
 const FuncionesNativas = require("./FuncionesNativas");
 
-function Operacion(_expresion, _ambito,_Error,_entorno,Simbol){
+function Operacion(_expresion, _ambito){
     if(_expresion.tipo === TIPO_VALOR.DECIMAL || _expresion.tipo === TIPO_VALOR.ENTERO 
         || _expresion.tipo === TIPO_VALOR.BANDERA || _expresion.tipo === TIPO_VALOR.CARACTER
         || _expresion.tipo === TIPO_VALOR.CADENA || _expresion.tipo === TIPO_VALOR.IDENTIFICADOR){
-        return ValorExpresion(_expresion, _ambito,_Error)
+        return ValorExpresion(_expresion, _ambito)
     }
     else if(_expresion.tipo === TIPO_OPERACION.SUMA || _expresion.tipo === TIPO_OPERACION.RESTA ||
         _expresion.tipo === TIPO_OPERACION.MULTIPLICACION ||_expresion.tipo === TIPO_OPERACION.DIVISION ||
@@ -44,7 +44,6 @@ function Operacion(_expresion, _ambito,_Error,_entorno,Simbol){
     }else if(_expresion.tipo === TIPO_INSTRUCCION.LLAMADA_METODO){
         const Exec = require("../Instruccion/Exec");
         var mensaje = Exec(_expresion, _ambito)
-        console.log(mensaje)
         return {
             cadena: mensaje.cadena,
             valorRetorno: mensaje.valorRetorno
