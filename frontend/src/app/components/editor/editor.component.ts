@@ -83,12 +83,13 @@ export class EditorComponent implements OnInit {
     let fileReader = new FileReader();
     fileReader.onload = (e) => {
       console.log(fileReader.result);
+      this.editorTexto.setValue(fileReader.result)
     }
     fileReader.readAsText(this.file);
   }
   descargar(){
     const fileName = 'prueba.txt'
-    this.manejador("holasaksl",fileName)
+    this.manejador(this.editorTexto.value,fileName)
     console.log("se descargo")
   }
   manejador(response:any,filename:string){
