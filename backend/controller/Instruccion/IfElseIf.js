@@ -6,6 +6,9 @@ function SentenciaIfElseIf(_instruccion, _ambito) {
     var mensaje = ""
     var operacion = Operacion(_instruccion.expresion, _ambito);
     var hayBreak = false
+    var hayContinue = false
+    var hayReturn = false
+    var valorRetorno = null
     //console.log(operacion)
     if (operacion.tipo === TIPO_DATO.BANDERA) {
         //console.log(operacion)
@@ -14,9 +17,15 @@ function SentenciaIfElseIf(_instruccion, _ambito) {
             const Bloque = require("./Bloque");
             var ejec = Bloque(_instruccion.instruccionesIf, nuevoAmbito)
             hayBreak = ejec.hayBreak;
+            hayContinue = ejec.hayContinue
             mensaje += ejec.cadena
+            hayReturn = ejec.hayReturn
+            valorRetorno = eje.valorRetorno
             return {
                 hayBreak: hayBreak,
+                haycontinue: hayContinue,
+                hayReturn:hayReturn,
+                valorRetorno: valorRetorno,
                 cadena: mensaje
             }
             //mensaje += Bloque(_instruccion.instrucciones,nuevoAmbito)
@@ -31,9 +40,15 @@ function SentenciaIfElseIf(_instruccion, _ambito) {
                     var ejec = Bloque(_instruccion.lista_elseif[i].instruccionesElseIf, nuevoAmbito)
                     hayBreak = ejec.hayBreak;
                     mensaje += ejec.cadena
+                    hayContinue = ejec.hayContinue
+                    hayReturn = ejec.hayReturn
+                    valorRetorno = eje.valorRetorno
                     return {
                         hayBreak: hayBreak,
-                        cadena: mensaje
+                        hayContinue: hayContinue,
+                        cadena: mensaje,
+                        valorRetorno:valorRetorno,
+                        hayReturn:hayReturn
                     }
                 }
             }
@@ -43,17 +58,27 @@ function SentenciaIfElseIf(_instruccion, _ambito) {
         }
         if(_instruccion.instruccionesElse!=null){
             const Bloque = require("./Bloque");
+            var nuevoAmbito = new Ambito(_ambito)
             var ejec = Bloque(_instruccion.instruccionesElse, nuevoAmbito)
             hayBreak = ejec.hayBreak;
+            hayContinue = ejec.hayContinue;
             mensaje += ejec.cadena
+            hayReturn = ejec.hayReturn
+            valorRetorno = eje.valorRetorno
         }
         return {
             hayBreak: hayBreak,
-            cadena: mensaje
+            hayContinue: hayContinue,
+            cadena: mensaje,
+            valorRetorno:valorRetorno,
+            hayReturn:hayReturn
         }
     }
     return {
         hayBreak: hayBreak,
+        hayContinue: hayContinue,
+        valorRetorno:valorRetorno,
+        hayReturn:hayReturn,
         cadena: `Error: No es una condicion válida para el if... Linea: ${_instruccion.linea} Columna: ${_instruccion.columna}`
     }
 }

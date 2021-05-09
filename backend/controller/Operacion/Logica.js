@@ -20,6 +20,8 @@ function Logica(_expresion, _ambito){
     }
     else if(_expresion.tipo === TIPO_OPERACION.AND){
         return and(_expresion.opIzq, _expresion.opDer, _ambito)
+    }else if(_expresion.tipo === TIPO_OPERACION.NOT){
+        return not(_expresion.opIzq, _ambito)
     }
     // a<5 || b>10
 }
@@ -79,6 +81,36 @@ function and(_opIzq, _opDer, _ambito){
     var respuesta = (opIzq.tipo===null ? opIzq.valor: "")+(opDer.tipo===null ? opDer.valor: "") //true+5+10+5
     return{
         valor: respuesta+ `\nError semántico: no se puede comparar el valor de tipo ${opIzq.tipo} \ncon el valor de tipo ${opDer.tipo}... Linea: +${_opIzq.linea}+" Columna: "+${_opIzq.columna}`,
+        tipo: null,
+        linea: _opIzq.linea,
+        columna: _opIzq.columna
+    }
+}
+
+function not(_opIzq, _ambito){
+    const opIzq = Logica(_opIzq, _ambito)
+    //console.log(_opDer)
+    /*
+    1 && 1 = 1
+    1 && 0 = 0
+    0 && 1 = 0
+    0 && 0 = 0
+    */
+    if(opIzq.tipo === TIPO_DATO.BANDERA){
+        var resultado = false
+        if(!opIzq.valor){
+            resultado = true
+        }
+        return {
+            valor: resultado,
+            tipo: TIPO_DATO.BANDERA,
+            linea: _opIzq.linea,
+            columna: _opIzq.columna
+        }
+    }
+    var respuesta = (opIzq.tipo===null ? opIzq.valor: "") //true+5+10+5
+    return{
+        valor: respuesta+ `\nError semántico: no se puede negar el valor de tipo ${opIzq.tipo}... Linea: +${_opIzq.linea}+" Columna: "+${_opIzq.columna}`,
         tipo: null,
         linea: _opIzq.linea,
         columna: _opIzq.columna

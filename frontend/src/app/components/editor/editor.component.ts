@@ -79,7 +79,33 @@ export class EditorComponent implements OnInit {
     console.log(this.consola.value)
     console.log(this.editorTexto.value)
   }
-
+  leer() {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+    }
+    fileReader.readAsText(this.file);
+  }
+  descargar(){
+    const fileName = 'prueba.txt'
+    this.manejador("holasaksl",fileName)
+    console.log("se descargo")
+  }
+  manejador(response:any,filename:string){
+    const dataType = response.type;
+    const binaryData = [];
+    binaryData.push(response)
+    const filepath = window.URL.createObjectURL(new Blob(binaryData,{type:dataType}));
+    const links = document.createElement('a');
+    links.setAttribute('download',filename)
+    links.href = filepath;
+    document.body.appendChild(links)
+    links.click()
+  }
+  file:any;
+  fileChanged(e:any) {
+      this.file = e.target.files[0];
+  }
   analizar(){
     var texto = {
       prueba: this.editorTexto.value

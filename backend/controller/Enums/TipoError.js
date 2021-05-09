@@ -1,0 +1,7 @@
+const TIPO_ERROR = {
+    LEXICO: 'LEXICO',
+    SEMANTICO: 'SEMANTICO',
+    SINTACTICO: 'SINTACTICO'
+}
+
+module.exports = TIPO_ERROR

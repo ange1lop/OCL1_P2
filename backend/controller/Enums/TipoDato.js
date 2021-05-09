@@ -1,7 +1,11 @@
 const TIPO_DATO = {
     DECIMAL: 'DECIMAL',
     CADENA: 'CADENA',
-    BANDERA: 'BANDERA'
+    BANDERA: 'BANDERA',
+    ENTERO: 'ENTERO',
+    CARACTER: 'CARACTER',
+    VECTOR: 'VECTOR',
+    LISTA: 'LISTA'
 }
 
 module.exports = TIPO_DATO

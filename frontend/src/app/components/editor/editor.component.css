@@ -14,7 +14,7 @@ a:focus{
 .tab{ font-family: 'Jura', sans-serif; }
 .tab .nav-tabs{ border: none; }
 .tab .nav-tabs li a{
-    color: #ff4300;
+    color: #5ab4d8;
     background: transparent;
     font-size: 18px;
     font-weight: 700;
@@ -29,14 +29,14 @@ a:focus{
 .tab .nav-tabs li.active a,
 .tab .nav-tabs li.active a:hover{
     color: #fff;
-    background-color: #ff4300;
+    background-color: #42166b;
     border: none;
 }
 .tab .nav-tabs li a:before{
     content: '';
     height: 70%;
     width: 100%;
-    border: 2px solid #ff4300;
+    border: 2px solid #2d75e0;
     border-bottom: none;
     border-radius: 30px 30px 0 0;
     position: absolute;
@@ -49,13 +49,13 @@ a:focus{
     height: 100%;
 }
 .tab .tab-content{
-    color: #ff4300;
+    color: #24c997;
     background: repeating-linear-gradient(45deg, transparent,transparent 10px,rgba(255,67,0,0.03) 10px, rgba(255,67,0,0.03) 20px);
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 1px;
     line-height: 25px;
     padding: 25px 25px 20px;
-    border: 2px solid #ff4300;
+    border: 2px solid #1eabec;
     border-radius: 0 0 30px 30px;
 }

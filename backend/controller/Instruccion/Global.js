@@ -4,7 +4,7 @@ const Declaracion = require("./Declaracion")
 const DecMetodo = require("./DecMetodo")
 const Exec = require("./Exec")
 
-function Global(_instrucciones, _ambito){
+function Global(_instrucciones, _ambito,_Error,_entorno,Simbol){
     var cadena = ""
     //console.log(_instrucciones)
     //1ERA PASADA VAMOS VERIFICAR DE QUE SOLO VENGA 1 EXEC
@@ -15,27 +15,31 @@ function Global(_instrucciones, _ambito){
         }
     }
     if(contadorExec==0){
+        var nuevo=new ERRORES(TIPO_ERROR.SEMANTICO,"No se ha detectado la sentencia EXEC",_instrucciones.linea, _instrucciones.columna);
+        _Error.addErrores(nuevo)
         return 'Error: No se ha detectado la sentencia EXEC'
     }
     else if(contadorExec>1){
+        var nuevo=new ERRORES(TIPO_ERROR.SEMANTICO,'Se ha detectado '+contadorExec+' EXEC',_instrucciones.linea, _instrucciones.columna);
+        _Error.addErrores(nuevo)
         return 'Error: Se ha detectado más de un EXEC'
     }
     //2DA PASADA VAMOS A DECLARAR VARIABLES, METODOS Y ASIGNAR VALORES
     for(let i=0; i<_instrucciones.length; i++){
         if(_instrucciones[i].tipo === TIPO_INSTRUCCION.DECLARACION){
-            var mensaje = Declaracion(_instrucciones[i], _ambito)
+            var mensaje = Declaracion(_instrucciones[i], _ambito,_Error,_entorno,Simbol)
             if(mensaje!=null){
                 cadena+=mensaje+'\n'
             }
         }
         else if(_instrucciones[i].tipo === TIPO_INSTRUCCION.ASIGNACION){
-            var mensaje = Asignacion(_instrucciones[i], _ambito)
+            var mensaje = Asignacion(_instrucciones[i], _ambito,_Error,_entorno,Simbol)
             if(mensaje!=null){
                 cadena+=mensaje+'\n'
             }
         }
-        else if(_instrucciones[i].tipo === TIPO_INSTRUCCION.DEC_METODO){
-            var mensaje = DecMetodo(_instrucciones[i], _ambito)
+        else if(_instrucciones[i].tipo === TIPO_INSTRUCCION.DEC_METODO || _instrucciones[i].tipo === TIPO_INSTRUCCION.DEC_FUNCION){
+            var mensaje = DecMetodo(_instrucciones[i], _ambito,_Error,_entorno,Simbol)
             if(mensaje!=null){
                 cadena+=mensaje+'\n'
             }
@@ -44,9 +48,9 @@ function Global(_instrucciones, _ambito){
     //console.log(_ambito)
     for(let i=0; i<_instrucciones.length; i++){
         if(_instrucciones[i].tipo === TIPO_INSTRUCCION.EXEC){
-            var mensaje = Exec(_instrucciones[i], _ambito)
-            if(mensaje!=null){
-                cadena+=mensaje
+            var mensaje = Exec(_instrucciones[i], _ambito,_Error,_entorno,Simbol)
+            if(mensaje.cadena!=null){
+                cadena+=mensaje.cadena
             }
             break
         }
