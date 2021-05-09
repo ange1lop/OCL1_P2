@@ -38,7 +38,7 @@ export class EditorComponent implements OnInit {
   editorTexto = new FormControl('');
   console = "";
   consola = new FormControl('');
-
+  simbolos = []
   constructor(private monacoLoaderService: MonacoEditorLoaderService, private analizarService: AnalizarService) {
     this.monacoLoaderService.isMonacoLoaded$
       .pipe(
