@@ -126,7 +126,7 @@ function Bloque(_instrucciones, _ambito){
         }
         else if(instruccion.tipo===TIPO_OPERACION.TERNARIO){
             const Ternario = require("../Operacion/Ternario")
-            var mensaje = Ternario(instruccion, _ambito,_Error,Simbol);
+            var mensaje = Ternario(instruccion, _ambito);
             if(mensaje!=null && mensaje.tipo===null){
                 cadena+=mensaje
             }

@@ -137,7 +137,8 @@ function Declaracion(_instruccion, _ambito){
             }else{
                 op = op2
             }
-            tipo = op.valorRetorno.tipo;
+            console.log(op)
+            tipo = op.tipo;
             if(tipo === TIPO_DATO.ENTERO){
                 valor = op.valor;
             }

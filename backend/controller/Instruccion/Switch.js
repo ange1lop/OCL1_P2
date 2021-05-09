@@ -33,7 +33,7 @@ function SwitchE(instruccion, _ambito) {
             }
                 //console.log("CASO: "+mensaje)
         }
-        if(hayreturn){
+        if(hayReturn){
             return {
                 cadena: mensaje,
                 hayReturn: hayReturn,

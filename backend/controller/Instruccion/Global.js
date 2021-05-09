@@ -5,6 +5,7 @@ const DecMetodo = require("./DecMetodo")
 const Exec = require("./Exec")
 
 function Global(_instrucciones, _ambito){
+    console.log("dime entre ")
     var cadena = ""
     //console.log(_instrucciones)
     //1ERA PASADA VAMOS VERIFICAR DE QUE SOLO VENGA 1 EXEC
@@ -45,6 +46,7 @@ function Global(_instrucciones, _ambito){
     for(let i=0; i<_instrucciones.length; i++){
         if(_instrucciones[i].tipo === TIPO_INSTRUCCION.EXEC){
             var mensaje = Exec(_instrucciones[i], _ambito)
+            console.log("Entre");
             if(mensaje.cadena!=null){
                 cadena+=mensaje.cadena
             }

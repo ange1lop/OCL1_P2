@@ -3,10 +3,12 @@ class Ambito {
         this.anterior = _anterior
         this.tablaSimbolos = new Map();
         this.tablaMetodos = new Map();
+        this.tablaSimbols = [];
     }
 
     addSimbolo(_s, _simbolo) {
         this.tablaSimbolos.set(_s.toLowerCase(), _simbolo)
+        this.agregarSimboloLista(_simbolo)
     }
 
     addMetodo(_s, _metodo) {
@@ -62,10 +64,18 @@ class Ambito {
             var encontrado = e.tablaSimbolos.get(_s.toLowerCase());
             if (encontrado != null) {
                 e.tablaSimbolos.set(_s, _simbolo)
+                this.agregarSimboloLista(_simbolo)
                 return true;
             }
         }
         return false
+    }
+    agregarSimboloLista(_simbolo){
+        for (let e = this; e != null; e = e.anterior) {
+            if(e.anterior == null){
+                e.tablaSimbols.push(_simbolo)
+            }
+        }
     }
 }
 

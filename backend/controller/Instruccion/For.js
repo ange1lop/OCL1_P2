@@ -5,7 +5,7 @@ const TIPO_INSTRUCCION = require("../Enums/TipoInstruccion");
 const Declaracion = require("./Declaracion");
 const Asignacion = require("./Asignacion");
 
-function CicloFor(_instruccion, _ambito,_Error,Simbol){
+function CicloFor(_instruccion, _ambito){
     var mensaje = ""
     var hayReturn=false;
     var valorRetorno=null;
@@ -34,7 +34,7 @@ function CicloFor(_instruccion, _ambito,_Error,Simbol){
             hayReturn=ejec.hayReturn
             valorRetorno=ejec.valorRetorno
             
-            if(ejec.hayBreak || hayreturn ||ejec.hayContinue  ){
+            if(ejec.hayBreak || hayReturn ||ejec.hayContinue  ){
                 return {
                     cadena: mensaje,
                     hayReturn: hayReturn,

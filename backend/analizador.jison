@@ -91,7 +91,7 @@
 /lex
 %{
   var lista_Errores = []
-  const TIPO_ERROR        = require('./controller/Enums/TipoError');
+  const TIPO_ERROR        = require('./controller/Ambito/TipoError');
   const ERROR            = require("./controller/Ambito/Error")
 	const TIPO_OPERACION	= require('./controller/Enums/TipoOperacion');
 	const TIPO_VALOR 		= require('./controller/Enums/TipoValor');
